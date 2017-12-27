@@ -5,12 +5,17 @@ const state = {
     name,
     url,
   }],
+  feeds: [{
+    uuid,
+    source,
+    feed,
+  }],
 }
 */
 
 import { combineReducers } from 'redux'
 
-import { RECEIVE_SOURCES } from '../actions'
+import { RECEIVE_SOURCES, RECEIVE_FEEDS } from '../actions'
 
 const sources = (state = [], action) => {
   switch (action.type) {
@@ -21,6 +26,16 @@ const sources = (state = [], action) => {
   }
 }
 
+const feeds = (state = [], action) => {
+  switch (action.type) {
+    case RECEIVE_FEEDS:
+      return action.feeds || state
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   sources,
+  feeds,
 })

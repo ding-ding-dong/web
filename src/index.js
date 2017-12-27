@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import App from './components/App'
 import reducer from './reducers'
-import * as Static from './components/static'
+import Static from './components/static'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -23,8 +23,8 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <div className="app">
-        <Route path="/static" component={Static.StaticDrawer} exact />
+      <div>
+        <Route path="/static" component={Static} exact />
         <Route path="/" component={App} exact />
       </div>
     </BrowserRouter>
