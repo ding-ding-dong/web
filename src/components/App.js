@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './App.css'
+
 import Drawer from './Drawer'
 import Feeds from './Feeds'
 

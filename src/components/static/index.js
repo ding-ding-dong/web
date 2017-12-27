@@ -1,6 +1,6 @@
 import React from 'react'
 
-// import PersistentDrawer from './demos/drawers/PersistentDrawer'
+import PersistentDrawer from './demos/drawers/PersistentDrawer'
 
 import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemText } from 'material-ui/List'
@@ -18,17 +18,7 @@ import Paper from 'material-ui/Paper'
 export default function Static() {
   return (
     <div>
-      <Drawer type="persistent" open={false}>
-        <Input placeholder="Type to search" />
-        <List>
-          <ListItem button>
-            <ListItemText primary="Trash" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Spam" />
-          </ListItem>
-        </List>
-      </Drawer>
+      <PersistentDrawer />
       <AppBar position="static">
         <Toolbar>
           <IconButton color="contrast">
