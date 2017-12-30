@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 
 import './App.css'
 
-import Drawer from './Drawer'
-import Feeds from './Feeds'
+import Layout from './Layout'
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <Drawer />
-        <Feeds />
+        <Layout />
       </div>
     )
   }
