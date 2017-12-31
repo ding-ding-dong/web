@@ -1,13 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import Drawer from 'material-ui/Drawer'
-import List, { ListItem, ListItemText } from 'material-ui/List'
+import { ListItem } from 'material-ui/List'
 import Input from 'material-ui/Input'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import IconButton from 'material-ui/IconButton'
-import MenuIcon from 'material-ui-icons/Menu'
-import Typography from 'material-ui/Typography'
 
 export const Container = styled.div`
   display: flex;

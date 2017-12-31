@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
-import List, { ListItem, ListItemText } from 'material-ui/List'
+import List, { ListItemText } from 'material-ui/List'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
@@ -20,7 +20,7 @@ import Typography from 'material-ui/Typography'
 
 import * as actions from '../actions'
 import { Container, SearchBox, SourceItem, Body } from './styled'
-import FeedList from './FeedList'
+import Feeds from './Feeds'
 
 const styles = {
   paperAnchorLeft: {
@@ -70,7 +70,7 @@ class Layout extends Component {
             </Toolbar>
           </AppBar>
           <Body>
-            <FeedList />
+            <Feeds />
           </Body>
         </Container>
       </div>

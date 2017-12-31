@@ -1,34 +1,13 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
-import List, { ListItem, ListItemText } from 'material-ui/List'
+import Layout from './Layout'
 
-import * as actions from '../actions'
-import { ListContainer } from './styled'
-
-class Feeds extends Component {
-  componentDidMount() {
-    this.props.fetchFeeds({ date: '2017-12-26', key: '36kr' })
-  }
+class FeedList extends Component {
   render() {
-    const { feeds } = this.props
-
     return (
-      <ListContainer>
-        <List>
-          {feeds.map(feed => (
-            <ListItem key={feed.uuid} button>
-              <ListItemText primary={feed.feed.title} secondary={feed.feed.summary} />
-            </ListItem>
-          ))}
-        </List>
-      </ListContainer>
+      <Layout />
     )
   }
 }
 
-const mapStateToProps = ({ feeds }) => ({
-  feeds,
-})
-
-export default connect(mapStateToProps, actions)(Feeds)
+export default FeedList

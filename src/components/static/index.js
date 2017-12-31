@@ -2,9 +2,9 @@ import React from 'react'
 
 import PersistentDrawer from './demos/drawers/PersistentDrawer'
 
-import Drawer from 'material-ui/Drawer'
+// import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import Input from 'material-ui/Input'
+// import Input from 'material-ui/Input'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
