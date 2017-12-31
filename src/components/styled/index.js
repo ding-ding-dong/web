@@ -5,6 +5,16 @@ import Input from 'material-ui/Input'
 
 export const Container = styled.div`
   display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+`
+
+export const ContainerCentered = Container.extend`
+  justify-content: center;
+`
+
+export const LayoutContainer = styled.div`
+  display: flex;
   flex-direction: column;
   position: relative;
   left: 0;
@@ -17,6 +27,7 @@ export const Container = styled.div`
 `
 
 export const SearchBox = styled(Input)`
+  flex: 0 0 auto;
   padding: 6px 16px;
 `
 

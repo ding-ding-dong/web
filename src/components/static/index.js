@@ -14,6 +14,7 @@ import AccountCircle from 'material-ui-icons/AccountCircle'
 import Avatar from 'material-ui/Avatar'
 import FolderIcon from 'material-ui-icons/Folder'
 import Paper from 'material-ui/Paper'
+import Tabs, { Tab } from 'material-ui/Tabs'
 
 export default function Static() {
   return (
@@ -54,6 +55,20 @@ export default function Static() {
           Paper can be used to build surface or other elements for your application.
         </Typography>
       </Paper>
+      <Tabs
+        indicatorColor="primary"
+        textColor="primary"
+        scrollable
+        scrollButtons="on"
+      >
+        <Tab label="Item One" />
+        <Tab label="Item Two" />
+        <Tab label="Item Three" />
+        <Tab label="Item Four" />
+        <Tab label="Item Five" />
+        <Tab label="Item Six" />
+        <Tab label="Item Seven" />
+      </Tabs>
     </div>
   )
 }
