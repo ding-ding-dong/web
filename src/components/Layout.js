@@ -1,7 +1,7 @@
 /*
 <div className="drawer"></div>
 <div className="contianer">
-  <div className="header"></div>
+  <div className="app-bar"></div>
   <div className="body"></div>
 </div>
 */
@@ -19,7 +19,8 @@ import MenuIcon from 'material-ui-icons/Menu'
 import Typography from 'material-ui/Typography'
 
 import * as actions from '../actions'
-import { Container, SearchBox, SourceItem } from './styled'
+import { Container, SearchBox, SourceItem, Body } from './styled'
+import FeedList from './FeedList'
 
 const styles = {
   paperAnchorLeft: {
@@ -68,6 +69,9 @@ class Layout extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
+          <Body>
+            <FeedList />
+          </Body>
         </Container>
       </div>
     )

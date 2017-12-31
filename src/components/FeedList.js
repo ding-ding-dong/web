@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import Avatar from 'material-ui/Avatar'
-import FolderIcon from 'material-ui-icons/Folder'
 
 import * as actions from '../actions'
+import { ListContainer } from './styled'
 
 class Feeds extends Component {
   componentDidMount() {
@@ -15,16 +14,15 @@ class Feeds extends Component {
     const { feeds } = this.props
 
     return (
-      <List>
-        {feeds.map(feed => (
-          <ListItem key={feed.uuid} button>
-            <Avatar>
-              <FolderIcon />
-            </Avatar>
-            <ListItemText primary={feed.feed.title} secondary={feed.feed.summary} />
-          </ListItem>
-        ))}
-      </List>
+      <ListContainer>
+        <List>
+          {feeds.map(feed => (
+            <ListItem key={feed.uuid} button>
+              <ListItemText primary={feed.feed.title} secondary={feed.feed.summary} />
+            </ListItem>
+          ))}
+        </List>
+      </ListContainer>
     )
   }
 }

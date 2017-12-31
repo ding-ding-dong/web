@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   position: relative;
   left: 0;
   transform: translate3d(0, 0, 0);
@@ -21,14 +22,19 @@ export const Container = styled.div`
   `}
 `
 
-export const Body = styled.div`
-  flex: 1 0 100%;
-`
-
 export const SearchBox = styled(Input)`
   padding: 6px 16px;
 `
 
 export const SourceItem = styled(ListItem)`
   padding: 6px 16px;
+`
+
+export const Body = styled.div`
+  display: flex;
+`
+
+export const ListContainer = styled.div`
+  width: 100%;
+  word-break: break-word;
 `
