@@ -9,20 +9,15 @@ export const Container = styled.div`
   flex: 1 0 auto;
 `
 
-export const ContainerCentered = Container.extend`
-  justify-content: center;
-`
-
 export const LayoutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  position: absolute;
   left: 0;
-  transform: translate3d(0, 0, 0);
-  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1);
+  right: 0;
+  will-change: left;
+  transition: left 225ms cubic-bezier(0, 0, 0.2, 1);
 
   ${props => props.isDrawerOpen && css`
-    transform: translateX(182px);
+    left: 182px;
   `}
 `
 

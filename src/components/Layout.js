@@ -24,7 +24,7 @@ import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, Body, ContainerCentered } from './styled'
+import { LayoutContainer, SearchBox, SourceItem, Body, Container } from './styled'
 import Feeds from './Feeds'
 
 const styles = {
@@ -85,7 +85,7 @@ class Layout extends Component {
           <SearchBox placeholder="搜索" />
           <List>
             {sources.map(source => (
-              <SourceItem button disableGutters key={source.key} component={Link} to={`/${date}/${source.key}`}>
+              <SourceItem button disableGutters color="primary" key={source.key} component={Link} to={`/${date}/${source.key}`}>
                 <ListItemText primary={source.name} />
               </SourceItem>
             ))}
@@ -98,10 +98,12 @@ class Layout extends Component {
                 <IconButton color="contrast" onClick={this.toggle}>
                   <MenuIcon />
                 </IconButton>
-                <Typography type="title" color="inherit">
-                  {currentSource.name}
-                </Typography>
-                <ContainerCentered>
+                <Container>
+                  <Typography type="title" color="inherit">
+                    {currentSource.name}
+                  </Typography>
+                </Container>
+                <Container>
                   <IconButton color="contrast" component={Link} to={`/${this.addDate(date, 1)}/${currentSource.key}`}>
                     <ChevronLeftIcon />
                   </IconButton>
@@ -109,7 +111,7 @@ class Layout extends Component {
                   <IconButton color="contrast" component={Link} to={`/${this.addDate(date, -1)}/${currentSource.key}`}>
                     <ChevronRightIcon />
                   </IconButton>
-                </ContainerCentered>
+                </Container>
               </Toolbar>
             </AppBar>
           )}
