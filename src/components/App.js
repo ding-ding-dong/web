@@ -10,8 +10,8 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Route path="/static" component={Static} exact />
-        <Route path="/" component={FeedList} exact />
+        <Route exact path="/static" component={Static} />
+        <Route exact path="/:date?/:key?" component={FeedList} />
       </div>
     )
   }

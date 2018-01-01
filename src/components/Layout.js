@@ -8,6 +8,9 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -36,7 +39,24 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSources()
+    this.props
+      .fetchSources()
+      .then(() => {
+        const { match: { params: { date, key } }, sources } = this.props
+        this.props.fetchFeeds({
+          date: date ? date : this.getPrevDate(),
+          key: key ? key : sources[0].key,
+        })
+      })
+  }
+
+  componentDidUpdate(prevProps) {
+    const { match: { params: { date: prevDate, key: prevKey } } } = prevProps
+    const { match: { params: { date, key } } } = this.props
+
+    if (prevDate !== date || prevKey !== key) {
+      this.props.fetchFeeds({ date, key })
+    }
   }
 
   toggle = () => {
@@ -44,9 +64,20 @@ class Layout extends Component {
     this.setState({ isDrawerOpen: !isDrawerOpen })
   }
 
+  getPrevDate = () => {
+    return moment.utc().utcOffset('+0800').add(-8, 'hours').add(-1, 'day').format('YYYY-MM-DD')
+  }
+
+  addDate = (date, value) => {
+    return moment.utc(date).utcOffset('+0800').add(value, 'day').format('YYYY-MM-DD')
+  }
+
   render() {
-    const { classes, sources } = this.props
+    const { classes, match: { params: { date: paramDate, key } }, sources, feeds } = this.props
     const { isDrawerOpen } = this.state
+
+    const date = paramDate ? paramDate : this.getPrevDate()
+    const currentSource = key ? sources.find(source => source.key === key) : sources[0]
 
     return (
       <div>
@@ -54,36 +85,38 @@ class Layout extends Component {
           <SearchBox placeholder="搜索" />
           <List>
             {sources.map(source => (
-              <SourceItem button disableGutters key={source.key}>
+              <SourceItem button disableGutters key={source.key} component={Link} to={`/${date}/${source.key}`}>
                 <ListItemText primary={source.name} />
               </SourceItem>
             ))}
           </List>
         </Drawer>
         <LayoutContainer isDrawerOpen={isDrawerOpen}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton color="contrast" onClick={this.toggle}>
-                <MenuIcon />
-              </IconButton>
-              <Typography type="title" color="inherit">
-                36氪
-              </Typography>
-              <ContainerCentered>
-                <IconButton color="contrast">
-                  <ChevronLeftIcon />
+          {currentSource && (
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton color="contrast" onClick={this.toggle}>
+                  <MenuIcon />
                 </IconButton>
                 <Typography type="title" color="inherit">
-                  2018-01-01
+                  {currentSource.name}
                 </Typography>
-                <IconButton color="contrast">
-                  <ChevronRightIcon />
-                </IconButton>
-              </ContainerCentered>
-            </Toolbar>
-          </AppBar>
+                <ContainerCentered>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate(date, 1)}/${currentSource.key}`}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                  <Typography type="title" color="inherit">{date}</Typography>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate(date, -1)}/${currentSource.key}`}>
+                    <ChevronRightIcon />
+                  </IconButton>
+                </ContainerCentered>
+              </Toolbar>
+            </AppBar>
+          )}
           <Body>
-            <Feeds />
+            {feeds.length > 0 && (
+              <Feeds feeds={feeds} />
+            )}
           </Body>
         </LayoutContainer>
       </div>
@@ -91,8 +124,9 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = ({ sources }) => ({
+const mapStateToProps = ({ sources, feeds }) => ({
   sources,
+  feeds,
 })
 
-export default connect(mapStateToProps, actions)(withStyles(styles)(Layout))
+export default withRouter(connect(mapStateToProps, actions)(withStyles(styles)(Layout)))
