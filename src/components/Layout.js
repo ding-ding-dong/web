@@ -2,7 +2,7 @@
 <div className="drawer"></div>
 <div className="layout-contianer">
   <div className="app-bar"></div>
-  <div className="body"></div>
+  <div className="app-body"></div>
 </div>
 */
 
@@ -24,8 +24,7 @@ import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, Body, Container } from './styled'
-import Feeds from './Feeds'
+import { LayoutContainer, SearchBox, SourceItem, Container, AppBody } from './styled'
 
 const styles = {
   paperAnchorLeft: {
@@ -39,23 +38,10 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-    this.props
-      .fetchSources()
-      .then(() => {
-        const { match: { params: { date, key } }, sources } = this.props
-        this.props.fetchFeeds({
-          date: date ? date : this.getPrevDate(),
-          key: key ? key : sources[0].key,
-        })
-      })
-  }
+    const { sources } = this.props
 
-  componentDidUpdate(prevProps) {
-    const { match: { params: { date: prevDate, key: prevKey } } } = prevProps
-    const { match: { params: { date, key } } } = this.props
-
-    if (prevDate !== date || prevKey !== key) {
-      this.props.fetchFeeds({ date, key })
+    if (sources.length === 0) {
+      this.props.fetchSources()
     }
   }
 
@@ -73,7 +59,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { classes, match: { params: { date: paramDate, key } }, sources, feeds } = this.props
+    const { classes, match: { params: { date: paramDate, key } }, sources, Body } = this.props
     const { isDrawerOpen } = this.state
 
     const date = paramDate ? paramDate : this.getPrevDate()
@@ -83,7 +69,7 @@ class Layout extends Component {
       <div>
         <Drawer type="persistent" classes={{ paperAnchorLeft: classes.paperAnchorLeft }} open={isDrawerOpen}>
           <SearchBox placeholder="搜索" />
-          <List>
+          <List component="div">
             {sources.map(source => (
               <SourceItem button disableGutters color="primary" key={source.key} component={Link} to={`/${date}/${source.key}`}>
                 <ListItemText primary={source.name} />
@@ -115,20 +101,17 @@ class Layout extends Component {
               </Toolbar>
             </AppBar>
           )}
-          <Body>
-            {feeds.length > 0 && (
-              <Feeds feeds={feeds} />
-            )}
-          </Body>
+          <AppBody>
+            <Body />
+          </AppBody>
         </LayoutContainer>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ sources, feeds }) => ({
+const mapStateToProps = ({ sources }) => ({
   sources,
-  feeds,
 })
 
 export default withRouter(connect(mapStateToProps, actions)(withStyles(styles)(Layout)))

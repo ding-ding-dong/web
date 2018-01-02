@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import List, { ListItem, ListItemText } from 'material-ui/List'
 
@@ -10,9 +11,9 @@ class Feeds extends Component {
 
     return (
       <ListContainer>
-        <List>
+        <List component="div">
           {feeds.map(feed => (
-            <ListItem key={feed.uuid} button>
+            <ListItem key={feed.uuid} button component={Link} to={`/feeds/${feed.uuid}`}>
               <ListItemText primary={feed.feed.title} secondary={feed.feed.description} />
             </ListItem>
           ))}

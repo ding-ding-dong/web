@@ -30,7 +30,7 @@ export const SourceItem = styled(ListItem)`
   padding: 6px 16px;
 `
 
-export const Body = styled.div`
+export const AppBody = styled.div`
   display: flex;
 `
 
