@@ -54,7 +54,7 @@ class Layout extends Component {
     return moment.utc().utcOffset('+0800').add(-8, 'hours').add(-1, 'day').format('YYYY-MM-DD')
   }
 
-  addDate = (date, value) => {
+  addDate = ({ date, value }) => {
     return moment.utc(date).utcOffset('+0800').add(value, 'day').format('YYYY-MM-DD')
   }
 
@@ -90,11 +90,11 @@ class Layout extends Component {
                   </Typography>
                 </Container>
                 <Container>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate(date, 1)}/${currentSource.key}`}>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
                     <ChevronLeftIcon />
                   </IconButton>
                   <Typography type="title" color="inherit">{date}</Typography>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate(date, -1)}/${currentSource.key}`}>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
                     <ChevronRightIcon />
                   </IconButton>
                 </Container>

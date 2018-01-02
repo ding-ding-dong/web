@@ -13,7 +13,7 @@ class App extends Component {
       <div className="app">
         <Switch>
           <Route exact path="/static" component={Static} />
-          <Route exact path="/feeds/:uuid" component={FeedDetail} />
+          <Route exact path="/:date/feeds/:uuid" component={FeedDetail} />
           <Route exact path="/:date?/:key?" component={FeedList} />
         </Switch>
       </div>

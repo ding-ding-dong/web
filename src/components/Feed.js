@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 
-import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+
+import { DetailContainer, DetailBody } from './styled'
 
 class Feed extends Component {
   render() {
-    const { feed } = this.props
+    const { feed: { feed } } = this.props
 
     return (
-      <Paper>
-        <Typography type="headline" component="h3">
-          This is a sheet of paper.
-        </Typography>
-        <Typography component="p">
-          Paper can be used to build surface or other elements for your application.
-        </Typography>
-      </Paper>
+      <DetailContainer>
+        {feed && (
+          <DetailBody>
+            <Typography type="headline" component="h3" paragraph>
+              {feed.title}
+            </Typography>
+            <Typography component="p" dangerouslySetInnerHTML={{ __html: feed.description }}>
+            </Typography>
+          </DetailBody>
+        )}
+      </DetailContainer>
     )
   }
 }

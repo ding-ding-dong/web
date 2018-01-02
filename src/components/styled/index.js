@@ -32,9 +32,24 @@ export const SourceItem = styled(ListItem)`
 
 export const AppBody = styled.div`
   display: flex;
+  flex: 1 0 100%;
 `
 
 export const ListContainer = styled.div`
   width: 100%;
   word-break: break-word;
+`
+
+export const DetailContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+export const DetailBody = styled.div`
+  width: 100%;
+  max-width: 800px;
+  padding: 20px 14px 40px;
 `
