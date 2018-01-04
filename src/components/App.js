@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import './App.css'
+import Reboot from 'material-ui/Reboot'
 
 import Static from './static'
 import FeedList from './FeedList'
@@ -11,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <Reboot />
         <Switch>
           <Route exact path="/static" component={Static} />
           <Route exact path="/:date/feeds/:uuid" component={FeedDetail} />
