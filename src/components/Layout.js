@@ -22,13 +22,17 @@ import MenuIcon from 'material-ui-icons/Menu'
 import Typography from 'material-ui/Typography'
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import ChevronRightIcon from 'material-ui-icons/ChevronRight'
+import deepPurple from 'material-ui/colors/deepPurple'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, Container, AppBody } from './styled'
+import { LayoutContainer, SearchBox, SourceItem, AppBody } from './styled'
 
 const styles = {
   paperAnchorLeft: {
     maxWidth: 180,
+  },
+  colorPrimary: {
+    color: deepPurple['A700'],
   },
 }
 
@@ -65,6 +69,10 @@ class Layout extends Component {
     const date = paramDate ? paramDate : this.getPrevDate()
     const currentSource = key ? sources.find(source => source.key === key) : sources[0]
 
+    if (!currentSource) {
+      return null
+    }
+
     return (
       <div>
         <Drawer type="persistent" classes={{ paperAnchorLeft: classes.paperAnchorLeft }} open={isDrawerOpen}>
@@ -72,35 +80,26 @@ class Layout extends Component {
           <List component="div">
             {sources.map(source => (
               <SourceItem button disableGutters color="primary" key={source.key} component={Link} to={`/${date}/${source.key}`}>
-                <ListItemText primary={source.name} />
+                <ListItemText primary={source.name} classes={ currentSource.key === source.key ? { text: classes.colorPrimary } : null } />
               </SourceItem>
             ))}
           </List>
         </Drawer>
         <LayoutContainer isDrawerOpen={isDrawerOpen}>
-          {currentSource && (
-            <AppBar position="static">
-              <Toolbar>
-                <IconButton color="contrast" onClick={this.toggle}>
-                  <MenuIcon />
-                </IconButton>
-                <Container>
-                  <Typography type="title" color="inherit">
-                    {currentSource.name}
-                  </Typography>
-                </Container>
-                <Container>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
-                    <ChevronLeftIcon />
-                  </IconButton>
-                  <Typography type="title" color="inherit">{date}</Typography>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
-                    <ChevronRightIcon />
-                  </IconButton>
-                </Container>
-              </Toolbar>
-            </AppBar>
-          )}
+          <AppBar position="static">
+            <Toolbar disableGutters>
+              <IconButton color="contrast" onClick={this.toggle}>
+                <MenuIcon />
+              </IconButton>
+              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
+                <ChevronLeftIcon />
+              </IconButton>
+              <Typography type="title" color="inherit">{date}</Typography>
+              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                <ChevronRightIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
           <AppBody>
             <Body />
           </AppBody>
