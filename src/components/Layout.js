@@ -90,11 +90,11 @@ class Layout extends Component {
                   </Typography>
                 </Container>
                 <Container>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
                     <ChevronLeftIcon />
                   </IconButton>
                   <Typography type="title" color="inherit">{date}</Typography>
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
                     <ChevronRightIcon />
                   </IconButton>
                 </Container>
