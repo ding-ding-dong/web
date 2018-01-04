@@ -42,7 +42,7 @@ const styles = {
 
 class Layout extends Component {
   state = {
-    isDrawerOpen: false,
+    isDrawerOpen: true,
   }
 
   componentDidMount() {
@@ -58,8 +58,22 @@ class Layout extends Component {
     this.setState({ isDrawerOpen: !isDrawerOpen })
   }
 
+  getCurrentDate = () => {
+    return moment().format('YYYY-MM-DD')
+  }
+
   getPrevDate = () => {
-    return moment.utc().utcOffset('+0800').add(-8, 'hours').add(-1, 'day').format('YYYY-MM-DD')
+    return moment(this.getCurrentDate()).add(-1, 'day').format('YYYY-MM-DD')
+  }
+
+  displayDate = date => {
+    if (date === this.getPrevDate()) {
+      return '昨天'
+    } else if (date === this.getCurrentDate()) {
+      return '今天'
+    } else {
+      return date
+    }
   }
 
   addDate = ({ date, value }) => {
@@ -71,7 +85,7 @@ class Layout extends Component {
     const { match: { params: { date: paramDate, key } }, sources, Body } = this.props
     const { isDrawerOpen } = this.state
 
-    const date = paramDate ? paramDate : this.getPrevDate()
+    const date = paramDate ? paramDate : this.getCurrentDate()
     const currentSource = key ? sources.find(source => source.key === key) : sources[0]
 
     if (!currentSource) {
@@ -105,10 +119,12 @@ class Layout extends Component {
                 <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
                   <ChevronLeftIcon />
                 </IconButton>
-                <Typography type="subheading" color="inherit">{date}</Typography>
-                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
-                  <ChevronRightIcon />
-                </IconButton>
+                <Typography type="subheading" color="inherit">{this.displayDate(date)}</Typography>
+                {date !== this.getCurrentDate() && (
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                    <ChevronRightIcon />
+                  </IconButton>
+                )}
               </ToolbarText>
             </Toolbar>
           </AppBar>

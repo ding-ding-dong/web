@@ -14,7 +14,7 @@ class Body extends Component {
       .then(() => {
         const { match: { params: { date, key } }, sources } = this.props
         this.props.fetchFeeds({
-          date: date ? date : this.getPrevDate(),
+          date: date ? this.getDateValue(date) : this.getDateValue(moment().format('YYYY-MM-DD')),
           key: key ? key : sources[0].key,
         })
       })
@@ -29,8 +29,8 @@ class Body extends Component {
     }
   }
 
-  getPrevDate = () => {
-    return moment.utc().utcOffset('+0800').add(-8, 'hours').add(-1, 'day').format('YYYY-MM-DD')
+  getDateValue = date => {
+    return moment(date).valueOf()
   }
 
   render() {
