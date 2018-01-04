@@ -25,9 +25,12 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 import deepPurple from 'material-ui/colors/deepPurple'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, AppBody } from './styled'
+import { LayoutContainer, SearchBox, SourceItem, AppBody, ToolbarText } from './styled'
 
 const styles = {
+  paper: {
+    height: '100%',
+  },
   paperAnchorLeft: {
     maxWidth: 180,
   },
@@ -38,7 +41,7 @@ const styles = {
 
 class Layout extends Component {
   state = {
-    isDrawerOpen: true,
+    isDrawerOpen: false,
   }
 
   componentDidMount() {
@@ -63,7 +66,8 @@ class Layout extends Component {
   }
 
   render() {
-    const { classes, match: { params: { date: paramDate, key } }, sources, Body } = this.props
+    const { classes: { paper, paperAnchorLeft, colorPrimary } } = this.props
+    const { match: { params: { date: paramDate, key } }, sources, Body } = this.props
     const { isDrawerOpen } = this.state
 
     const date = paramDate ? paramDate : this.getPrevDate()
@@ -75,12 +79,12 @@ class Layout extends Component {
 
     return (
       <div>
-        <Drawer type="persistent" classes={{ paperAnchorLeft: classes.paperAnchorLeft }} open={isDrawerOpen}>
+        <Drawer type="persistent" classes={{ paper, paperAnchorLeft }} open={isDrawerOpen}>
           <SearchBox placeholder="搜索" />
           <List component="div">
             {sources.map(source => (
               <SourceItem button disableGutters color="primary" key={source.key} component={Link} to={`/${date}/${source.key}`}>
-                <ListItemText primary={source.name} classes={ currentSource.key === source.key ? { text: classes.colorPrimary } : null } />
+                <ListItemText primary={source.name} classes={ currentSource.key === source.key ? { text: colorPrimary } : null } />
               </SourceItem>
             ))}
           </List>
@@ -91,13 +95,15 @@ class Layout extends Component {
               <IconButton color="contrast" onClick={this.toggle}>
                 <MenuIcon />
               </IconButton>
-              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
-                <ChevronLeftIcon />
-              </IconButton>
-              <Typography type="title" color="inherit">{date}</Typography>
-              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
-                <ChevronRightIcon />
-              </IconButton>
+              <ToolbarText>
+                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
+                  <ChevronLeftIcon />
+                </IconButton>
+                <Typography type="title" color="inherit">{date}</Typography>
+                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                  <ChevronRightIcon />
+                </IconButton>
+              </ToolbarText>
             </Toolbar>
           </AppBar>
           <AppBody>
