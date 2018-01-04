@@ -5,6 +5,8 @@ import Reboot from 'material-ui/Reboot'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import deepPurple from 'material-ui/colors/deepPurple'
 
+import './App.css'
+
 import Static from './static'
 import FeedList from './FeedList'
 import FeedDetail from './FeedDetail'
