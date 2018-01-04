@@ -17,6 +17,7 @@ import Drawer from 'material-ui/Drawer'
 import List, { ListItemText } from 'material-ui/List'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
+import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 import Typography from 'material-ui/Typography'
@@ -95,11 +96,16 @@ class Layout extends Component {
               <IconButton color="contrast" onClick={this.toggle}>
                 <MenuIcon />
               </IconButton>
+              <Button color="contrast" href="/">
+                <Typography type="subheading" color="inherit">
+                  叮咚小咚
+                </Typography>
+              </Button>
               <ToolbarText>
                 <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
                   <ChevronLeftIcon />
                 </IconButton>
-                <Typography type="title" color="inherit">{date}</Typography>
+                <Typography type="subheading" color="inherit">{date}</Typography>
                 <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
                   <ChevronRightIcon />
                 </IconButton>
