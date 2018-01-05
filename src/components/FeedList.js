@@ -4,29 +4,31 @@ import { withRouter } from 'react-router'
 import moment from 'moment'
 
 import * as actions from '../actions'
+import { Container } from './styled'
 import Layout from './Layout'
 import Feeds from './Feeds'
+import Processing from './Processing'
 
 class Body extends Component {
+  state = {
+    isProcessing: true,
+  }
+
   componentDidMount() {
     this.props
       .fetchSources()
       .then(() => {
         const { match: { params: { date, key } }, sources } = this.props
-        this.props.fetchFeeds({
-          date: date ? this.getDateValue(date) : this.getDateValue(moment().format('YYYY-MM-DD')),
-          key: key ? key : sources[0].key,
-        })
+
+        this.props
+          .fetchFeeds({
+            date: date ? this.getDateValue(date) : this.getDateValue(moment().format('YYYY-MM-DD')),
+            key: key ? key : sources[0].key,
+          })
+          .then(() => {
+            this.setState({ 'isProcessing': false })
+          })
       })
-  }
-
-  componentDidUpdate(prevProps) {
-    const { match: { params: { date: prevDate, key: prevKey } } } = prevProps
-    const { match: { params: { date, key } } } = this.props
-
-    if (prevDate !== date || prevKey !== key) {
-      this.props.fetchFeeds({ date, key })
-    }
   }
 
   getDateValue = date => {
@@ -35,9 +37,16 @@ class Body extends Component {
 
   render() {
     const { feeds } = this.props
+    const { isProcessing } = this.state
 
     return (
-      <Feeds feeds={feeds} />
+      <Container>
+        {isProcessing ? (
+          <Processing />
+        ) : (
+          <Feeds feeds={feeds} />
+        )}
+      </Container>
     )
   }
 }

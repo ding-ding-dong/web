@@ -42,7 +42,7 @@ const styles = {
 
 class Layout extends Component {
   state = {
-    isDrawerOpen: true,
+    isDrawerOpen: false,
   }
 
   componentDidMount() {

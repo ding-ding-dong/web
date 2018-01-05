@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components'
 import { ListItem } from 'material-ui/List'
 import Input from 'material-ui/Input'
 
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+`
+
 export const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,4 +58,12 @@ export const DetailBody = styled.div`
   width: 100%;
   max-width: 800px;
   padding: 20px 14px 40px;
+`
+
+export const ProcessingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
 `
