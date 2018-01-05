@@ -18,7 +18,7 @@ class Feeds extends Component {
       <ListContainer>
         <List component="div">
           {feeds.map(feed => (
-            <ListItem key={feed.uuid} button component={Link} to={`/${this.getDate(feed.feed.date)}/feeds/${feed.uuid}`}>
+            <ListItem key={feed.uuid} button component={Link} to={`/${this.getDate(feed.feed.date)}/${feed.source.key}/${feed.uuid}`}>
               <ListItemText primary={feed.feed.title} secondary={feed.feed.description} />
             </ListItem>
           ))}

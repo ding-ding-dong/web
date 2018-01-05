@@ -24,7 +24,7 @@ class App extends Component {
         <Reboot />
         <Switch>
           <Route exact path="/static" component={Static} />
-          <Route exact path="/:date/feeds/:uuid" component={FeedDetail} />
+          <Route exact path="/:date/:key/:uuid" component={FeedDetail} />
           <Route exact path="/:date?/:key?" component={FeedList} />
         </Switch>
       </MuiThemeProvider>
