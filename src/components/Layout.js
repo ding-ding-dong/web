@@ -26,7 +26,7 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 import deepPurple from 'material-ui/colors/deepPurple'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, AppBody, ToolbarText } from './styled'
+import { LayoutContainer, SearchBox, SourceItem, AppBody } from './styled'
 
 const styles = {
   paper: {
@@ -110,22 +110,17 @@ class Layout extends Component {
               <IconButton color="contrast" onClick={this.toggle}>
                 <MenuIcon />
               </IconButton>
-              <Button color="contrast" href="/">
-                <Typography type="subheading" color="inherit">
-                  叮咚小咚
-                </Typography>
-              </Button>
-              <ToolbarText>
-                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
-                  <ChevronLeftIcon />
-                </IconButton>
+              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
+                <ChevronLeftIcon />
+              </IconButton>
+              <Button dense color="contrast" component={Link} to={`/${date}/${currentSource.key}`}>
                 <Typography type="subheading" color="inherit">{this.displayDate(date)}</Typography>
-                {date !== this.getCurrentDate() && (
-                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
-                    <ChevronRightIcon />
-                  </IconButton>
-                )}
-              </ToolbarText>
+              </Button>
+              {date !== this.getCurrentDate() && (
+                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                  <ChevronRightIcon />
+                </IconButton>
+              )}
             </Toolbar>
           </AppBar>
           <AppBody>

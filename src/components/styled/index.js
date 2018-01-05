@@ -30,12 +30,6 @@ export const SourceItem = styled(ListItem)`
   padding: 6px 16px;
 `
 
-export const ToolbarText = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-`
-
 export const AppBody = styled.div`
   display: flex;
   flex: 1 0 100%;
