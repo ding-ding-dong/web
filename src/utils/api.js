@@ -1,4 +1,4 @@
-const baseUrl = 'http://www.mystist.com:8080'
+const baseUrl = '/api'
 
 export const fetchSources = () => {
   return fetch(`${baseUrl}/sources`)
