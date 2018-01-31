@@ -15,6 +15,7 @@ import Avatar from 'material-ui/Avatar'
 import FolderIcon from 'material-ui-icons/Folder'
 import Paper from 'material-ui/Paper'
 import Tabs, { Tab } from 'material-ui/Tabs'
+import TextField from 'material-ui/TextField'
 
 export default function Static() {
   return (
@@ -47,6 +48,7 @@ export default function Static() {
           <ListItemText primary="Work" secondary="Jan 7, 2016" />
         </ListItem>
       </List>
+
       <Paper>
         <Typography type="headline" component="h3">
           This is a sheet of paper.
@@ -55,6 +57,13 @@ export default function Static() {
           Paper can be used to build surface or other elements for your application.
         </Typography>
       </Paper>
+
+      <form>
+        <TextField label="值" value="36kr" margin="normal" fullWidth />
+        <TextField label="名称" value="36氪" margin="normal" fullWidth />
+        <TextField label="URL" value="http://36kr.com/feed" margin="normal" fullWidth />
+      </form>
+
       <Tabs
         indicatorColor="primary"
         textColor="primary"

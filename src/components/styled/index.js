@@ -61,3 +61,8 @@ export const ProcessingContainer = styled.div`
   width: 100%;
   padding: 12px 0;
 `
+
+export const ToolbarTitle = styled.div`
+  display: flex;
+  flex: 1;
+`

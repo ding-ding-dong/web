@@ -24,11 +24,14 @@ import Typography from 'material-ui/Typography'
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 import deepPurple from 'material-ui/colors/deepPurple'
+import Modal from 'material-ui/Modal'
+import TextField from 'material-ui/TextField'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
 
 import * as actions from '../actions'
-import { LayoutContainer, SearchBox, SourceItem, AppBody } from './styled'
+import { LayoutContainer, SearchBox, SourceItem, AppBody, ToolbarTitle } from './styled'
 
-const styles = {
+const styles = theme => ({
   paper: {
     height: '100%',
   },
@@ -38,11 +41,30 @@ const styles = {
   colorPrimary: {
     color: deepPurple['A700'],
   },
+  modal: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+  },
+})
+
+const getModalStyle = () => {
+  const top = 50
+  const left = 50
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
 }
 
 class Layout extends Component {
   state = {
     isDrawerOpen: false,
+    isModalOpen: false,
   }
 
   componentDidMount() {
@@ -81,7 +103,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { classes: { paper, paperAnchorLeft, colorPrimary } } = this.props
+    const { classes: { paper, paperAnchorLeft, colorPrimary, modal } } = this.props
     const { match: { params: { date: paramDate, key } }, sources, Body } = this.props
     const { isDrawerOpen } = this.state
 
@@ -110,23 +132,43 @@ class Layout extends Component {
               <IconButton color="contrast" onClick={this.toggle}>
                 <MenuIcon />
               </IconButton>
-              <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
-                <ChevronLeftIcon />
-              </IconButton>
-              <Button dense color="contrast" component={Link} to={`/${date}/${currentSource.key}`}>
-                <Typography type="subheading" color="inherit">{this.displayDate(date)}</Typography>
-              </Button>
-              {date !== this.getCurrentDate() && (
-                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
-                  <ChevronRightIcon />
+            
+              <ToolbarTitle>
+                <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: -1 })}/${currentSource.key}`}>
+                  <ChevronLeftIcon />
                 </IconButton>
-              )}
+                <Button dense color="contrast" component={Link} to={`/${date}/${currentSource.key}`}>
+                  <Typography type="subheading" color="inherit">{this.displayDate(date)}</Typography>
+                </Button>
+                {date !== this.getCurrentDate() && (
+                  <IconButton color="contrast" component={Link} to={`/${this.addDate({ date, value: 1 })}/${currentSource.key}`}>
+                    <ChevronRightIcon />
+                  </IconButton>
+                )}
+              </ToolbarTitle>
+
+              <Button color="contrast" onClick={() => this.setState({ isModalOpen: true })}>
+                <Typography type="subheading" color="inherit">添加RSS源</Typography>
+              </Button>
             </Toolbar>
           </AppBar>
           <AppBody>
             <Body />
           </AppBody>
         </LayoutContainer>
+        <Modal open={this.state.isModalOpen} onClose={() => this.setState({ isModalOpen: false })}>
+          <Card style={getModalStyle()} className={modal}>
+            <CardContent>
+              <Typography type="headline" color="inherit">添加RSS源</Typography>
+              <TextField label="值" value="36kr" margin="normal" fullWidth />
+              <TextField label="名称" value="36氪" margin="normal" fullWidth />
+              <TextField label="URL" value="http://36kr.com/feed" margin="normal" fullWidth />
+            </CardContent>
+            <CardActions>
+              <Button raised color="primary">确定</Button>
+            </CardActions>
+          </Card>
+        </Modal>
       </div>
     )
   }
