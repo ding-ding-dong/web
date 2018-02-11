@@ -23,7 +23,7 @@ class Body extends Component {
         this.props
           .fetchFeeds({
             date: date ? this.getDateValue(date) : this.getDateValue(moment().format('YYYY-MM-DD')),
-            key: key ? key : sources[0].key,
+            key: key ? key : (sources.length > 0 ? sources[0].key : ''),
           })
           .then(() => {
             this.setState({ 'isProcessing': false })
