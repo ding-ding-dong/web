@@ -32,7 +32,7 @@ production docker run cmd:
 docker run -d --name ding-ding-dong-web --restart=always -e NODE_ENV=production -p 443:443 ding-ding-dong-web
 
 localhost docker run cmd:
-docker run -it --rm --name ding-ding-dong-web -p 443:443 --net=host ding-ding-dong-web
+docker run -it --rm --name ding-ding-dong-web -p 443:443 ding-ding-dong-web
 
 # ---
 nginx的配置要自己理解，网上的资料太乱
